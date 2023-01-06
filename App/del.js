@@ -32,7 +32,9 @@ client.connect(function (error) {
 
         console.log('Connection to Aerospike cluster succeeded!')
         console.log(key," deleted")
+
     }
+    client.close()
 })
 
 

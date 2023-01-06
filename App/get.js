@@ -28,7 +28,11 @@ Aerospike.connect(function (error, client) {
                     console.log('ERR - ', error, key)
             }
         } else {
-            console.log('OK - ', record)
+            console.log('Full Record: ', record)
+            console.log('Name: ', record.bins.name)
+            console.log('Age: ', record.bins.age)
+            console.log('Car ', record.bins.car)
+            console.log('Json Out ', JSON.stringify(record.bins))
         }
         client.close()
     })

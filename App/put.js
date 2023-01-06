@@ -28,23 +28,25 @@ client.connect(function (error) {
         let bins = {
             uid:     1000,                // integer data stored in bin called "uid"
             name:    'Taylor Graham',         // string data stored in bin called "user_name"
-            dob:     { mm: 08, dd: 01, yy: 1983},  // map data stored (msgpack format) in bin called "dob"
+            dob:     { mm:8, dd: 1, yy: 1983},  // map data stored (msgpack format) in bin called "dob"
             friends: [1001, 1002, 1003],  // list data stored (msgpack format) in bin called "friends"
-            avatar:  Buffer.from([0xa, 0xb, 0xc])   // blob data stored in a bin called "avatar"
+
         }
 
 
-        let jsonTest = {"name":"John", "age":30, "car":null}
+        let JsonBin = {"name":"Taylor", "age":39, "car":"Jeep","awesome":true, "meaningOfLife":null}
 
-        client.put(key, bins, function (error) {
+        client.put(key, JsonBin, function (error) {
             if (error) {
                 console.log('error: %s', error.message)
             } else {
                 console.log('Record written to database successfully.')
 
             }
+            client.close()
           })
     }
+
 })
 
 
