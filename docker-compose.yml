@@ -2,8 +2,8 @@
 version: '3.8'
 
 services:
-  aerospike1:
-    container_name: aerospike2
+  aerospike:
+    container_name: aerospike
     image: aerospike/aerospike-server-enterprise:latest
 #    volumes:
 #      - .:/etc/aerospike
@@ -11,6 +11,16 @@ services:
 #    command: [ "--config-file","/etc/aerospike/aerospike.conf" ]
     ports:
       - "3000:3000"
+
+  aerospike_tools:
+    container_name: aerospiketools
+    image: aerospike/aerospike-tools:latest
+    depends_on:
+      - aerospike
+    command: [asadm, -haerospike]
+    stdin_open: true
+
+
 
   exporter1:
    image: aerospike/aerospike-prometheus-exporter:latest
@@ -41,7 +51,7 @@ services:
         target: /etc/prometheus/aerospike_rules.yml
         type: bind
     depends_on:
-      - exporter
+      - exporter1
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
